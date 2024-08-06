@@ -14,5 +14,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
         <mapping class="cars.model.User"/>
+        <mapping class="cars.model.Post"/>
+        <mapping class="cars.model.PriceHistory"/>
     </session-factory>
 </hibernate-configuration>
