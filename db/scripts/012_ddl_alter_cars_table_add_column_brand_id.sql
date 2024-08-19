@@ -1,0 +1,1 @@
+alter table cars add column brand_id int references brands(id);
