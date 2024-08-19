@@ -16,5 +16,11 @@
         <mapping class="cars.model.User"/>
         <mapping class="cars.model.Post"/>
         <mapping class="cars.model.PriceHistory"/>
+        <mapping class="cars.model.Engine"/>
+        <mapping class="cars.model.Owner"/>
+        <mapping class="cars.model.Car"/>
+        <mapping class="cars.model.History"/>
+        <mapping class="cars.model.Brand"/>
+        <mapping class="cars.model.Photo"/>
     </session-factory>
 </hibernate-configuration>
