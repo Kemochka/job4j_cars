@@ -59,7 +59,7 @@ public class HbmPostRepository implements PostRepository {
 
     @Override
     public Collection<Post> findAll() {
-        return crudRepository.query("from Post", Post.class);
+        return crudRepository.query("from Post as p join fetch p.priceHistory", Post.class);
     }
 
     @Override

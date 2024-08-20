@@ -28,7 +28,7 @@ public class HbmEngineRepository implements EngineRepository {
 
     @Override
     public Collection<Engine> findAll() {
-        return crudRepository.query("fron Engine", Engine.class);
+        return crudRepository.query("from Engine", Engine.class);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class HbmEngineRepository implements EngineRepository {
     public boolean deleteById(int id) {
         boolean result = false;
         try {
-            crudRepository.run("delete from Engine where id = fId", Map.of("fId", id));
+            crudRepository.run("delete from Engine where id = :fId", Map.of("fId", id));
             result = true;
         } catch (Exception e) {
             LOGGER.error("Exception during delete engine by id");
