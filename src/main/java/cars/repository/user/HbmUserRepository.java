@@ -3,11 +3,13 @@ package cars.repository.user;
 import cars.model.User;
 import cars.repository.CrudRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 @AllArgsConstructor
 public class HbmUserRepository implements UserRepository {
     private final CrudRepository crudRepository;
@@ -84,10 +86,10 @@ public class HbmUserRepository implements UserRepository {
      * @param login login.
      * @return Optional or user.
      */
-    public Optional<User> findByLogin(String login) {
+    public Optional<User> findByLoginAndPassword(String login, String password) {
         return crudRepository.optional(
-                "from User where login = :fLogin", User.class,
-                Map.of("fLogin", login)
+                "from User where login = :fLogin and password = :fPassword", User.class,
+                Map.of("fLogin", login, "fPassword", password)
         );
     }
 }
