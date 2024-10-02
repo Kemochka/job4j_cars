@@ -23,5 +23,6 @@
         <mapping class="cars.model.History"/>
         <mapping class="cars.model.Brand"/>
         <mapping class="cars.model.Photo"/>
+        <mapping class="cars.model.Color"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,0 +1,1 @@
+alter table auto_user add column timezone varchar(200) not null default 'UTC';
