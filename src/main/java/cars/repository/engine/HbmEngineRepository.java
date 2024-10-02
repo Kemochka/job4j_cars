@@ -37,6 +37,11 @@ public class HbmEngineRepository implements EngineRepository {
     }
 
     @Override
+    public Optional<Engine> findByName(String name) {
+        return crudRepository.optional("from Engine where name = :fName", Engine.class, Map.of("fName", name));
+    }
+
+    @Override
     public boolean update(Engine engine) {
         boolean result = false;
         try {

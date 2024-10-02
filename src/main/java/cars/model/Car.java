@@ -22,4 +22,7 @@ public class Car {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "BRAND_ID_FK"))
     private Brand brand;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "color_id", foreignKey = @ForeignKey(name = "COLOR_ID_FK"))
+    private Color color;
 }

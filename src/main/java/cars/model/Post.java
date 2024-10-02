@@ -2,15 +2,18 @@ package cars.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "auto_post")
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Post {
     @Id
@@ -18,7 +21,8 @@ public class Post {
     @EqualsAndHashCode.Include
     private int id;
     private String description;
-    private LocalDateTime created;
+    private LocalDateTime created = LocalDateTime.now(ZoneId.of("UTC"));
+    private boolean sold;
     @ManyToOne
     @JoinColumn(name = "auto_user_id")
     private User user;
@@ -36,6 +40,6 @@ public class Post {
     @JoinColumn(name = "car_id")
     private Car car;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "photo_id")
+    @JoinColumn(name = "post_id")
     private List<Photo> photos = new ArrayList<>();
 }

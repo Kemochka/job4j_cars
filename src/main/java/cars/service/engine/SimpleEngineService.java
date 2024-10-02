@@ -29,6 +29,11 @@ public class SimpleEngineService implements EngineService {
     }
 
     @Override
+    public Optional<Engine> findByName(String name) {
+        return engineRepository.findByName(name);
+    }
+
+    @Override
     public boolean update(Engine engine) {
         return engineRepository.update(engine);
     }
