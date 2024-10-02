@@ -59,7 +59,7 @@ public class HbmPostRepository implements PostRepository {
 
     @Override
     public Collection<Post> findAll() {
-        return crudRepository.query("from Post as p join fetch p.priceHistory", Post.class);
+        return crudRepository.query("from Post as p join fetch p.photos", Post.class);
     }
 
     @Override
@@ -69,11 +69,11 @@ public class HbmPostRepository implements PostRepository {
 
     @Override
     public Collection<Post> findPostsWithPhoto() {
-        return crudRepository.query("from p Post where p.photo.size !=0", Post.class);
+        return crudRepository.query("from Post p where size(p.photos) !=0", Post.class);
     }
 
     @Override
     public Collection<Post> findPostsWithBrand(Brand brand) {
-        return crudRepository.query("from p Post where p.brand.name = :fBrand", Post.class, Map.of("fBrand", brand));
+        return crudRepository.query("from Post p where p.brand.name = :fBrand", Post.class, Map.of("fBrand", brand));
     }
 }

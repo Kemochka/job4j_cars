@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,7 +25,8 @@ public class SimplePostService implements PostService {
 
     private void saveNewFile(Post post, PhotoDto image) {
         var file = photoService.save(image);
-        post.setPhotos(List.of(file));
+        file.setPost(post);
+        post.getPhotos().add(file);
     }
 
     @Override
@@ -41,7 +41,6 @@ public class SimplePostService implements PostService {
 
     @Override
     public boolean deleteById(int id) {
-        photoService.deleteById(id);
         return postRepository.deleteById(id);
     }
 
