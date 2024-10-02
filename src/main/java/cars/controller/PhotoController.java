@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/photo")
+@RequestMapping("/photos")
 public class PhotoController {
     private final PhotoService photoService;
 
@@ -20,6 +20,7 @@ public class PhotoController {
         if (contentOptional.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        System.out.println("Fetching photo with ID: " + id);
         return ResponseEntity.ok(contentOptional.get().getContent());
     }
 }

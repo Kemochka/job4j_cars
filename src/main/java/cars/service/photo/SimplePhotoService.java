@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -59,6 +60,11 @@ public class SimplePhotoService implements PhotoService {
         }
         var content = readFileAsBytes(photoOptional.get().getPath());
         return Optional.of(new PhotoDto(photoOptional.get().getName(), content));
+    }
+
+    @Override
+    public List<Photo> findByPostId(int postId) {
+        return photoRepository.findByPostId(postId);
     }
 
     private byte[] readFileAsBytes(String path) {
