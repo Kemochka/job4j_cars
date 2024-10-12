@@ -40,4 +40,14 @@ public class HbmPhotoRepository implements PhotoRepository {
     public void deleteById(int id) {
         crudRepository.run("delete from Photo where id = :fId", Map.of("fId", id));
     }
+
+    @Override
+    public boolean deleteByPostId(int postId) {
+        try {
+            var result = crudRepository.run("delete from Photo where post.id = :fPostId", Map.of("fPostId", postId));
+            return result > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

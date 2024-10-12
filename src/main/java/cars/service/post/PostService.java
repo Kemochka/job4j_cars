@@ -12,7 +12,7 @@ public interface PostService {
 
     Optional<Post> findById(int id);
 
-    boolean update(Post post);
+    boolean update(Post post, PhotoDto image);
 
     boolean deleteById(int id);
 

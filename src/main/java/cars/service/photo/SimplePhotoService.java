@@ -84,6 +84,16 @@ public class SimplePhotoService implements PhotoService {
         }
     }
 
+    @Override
+    public void deleteByPostId(int postId) {
+        var photos = photoRepository.findByPostId(postId);
+        if (photoRepository.deleteByPostId(postId)) {
+            for (Photo photo : photos) {
+                deleteFile(photo.getPath());
+            }
+        }
+    }
+
     private void deleteFile(String path) {
         try {
             Files.deleteIfExists(Path.of(path));

@@ -35,7 +35,17 @@ public class SimplePostService implements PostService {
     }
 
     @Override
-    public boolean update(Post post) {
+    public boolean update(Post post, PhotoDto image) {
+        var isNewFileEmpty = image.getContent().length == 0;
+        if (!isNewFileEmpty) {
+            photoService.deleteByPostId(post.getId());
+            saveNewFile(post, image);
+        } else {
+            var oldPhoto = photoService.findByPostId(post.getId());
+            if (oldPhoto != null) {
+                post.setPhotos(oldPhoto);
+            }
+        }
         return postRepository.update(post);
     }
 

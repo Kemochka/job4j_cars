@@ -14,4 +14,6 @@ public interface PhotoService {
     List<Photo> findByPostId(int postId);
 
     void deleteById(int id);
+
+    void deleteByPostId(int postId);
 }
