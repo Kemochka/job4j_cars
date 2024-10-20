@@ -1,6 +1,7 @@
 package cars.service.post;
 
 import cars.dto.PhotoDto;
+import cars.dto.PostDto;
 import cars.model.Brand;
 import cars.model.Post;
 
@@ -23,4 +24,6 @@ public interface PostService {
     Collection<Post> findPostsWithPhoto();
 
     Collection<Post> findPostsWithBrand(Brand brand);
+
+    PostDto convertToDto(Post post);
 }
