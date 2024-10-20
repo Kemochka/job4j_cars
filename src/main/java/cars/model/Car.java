@@ -1,6 +1,7 @@
 package cars.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "cars")
 @Data
+@NoArgsConstructor
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

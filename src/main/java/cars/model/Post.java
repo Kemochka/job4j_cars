@@ -29,6 +29,7 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
     private List<PriceHistory> priceHistory = new ArrayList<>();
+    private long price;
     @ManyToMany
     @JoinTable(
             name = "participate",
@@ -42,4 +43,16 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
     private List<Photo> photos = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Post{"
+                + "id=" + id
+                + ", userId=" + (user != null ? user.getId() : "null")
+                + ", carId=" + (car != null ? car.getId() : "null")
+                + ", created=" + created
+                + ", isSold=" + sold
+                + ", price=" + price
+                + '}';
+    }
 }
