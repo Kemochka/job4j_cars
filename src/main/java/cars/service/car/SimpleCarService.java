@@ -1,5 +1,6 @@
 package cars.service.car;
 
+import cars.dto.CarDto;
 import cars.model.Car;
 import cars.repository.car.CarRepository;
 import lombok.AllArgsConstructor;
@@ -19,13 +20,14 @@ public class SimpleCarService implements CarService {
     }
 
     @Override
-    public Collection<Car> findAll() {
-        return carRepository.findAll();
+    public Collection<CarDto> findAll() {
+        Collection<Car> cars = carRepository.findAll();
+        return cars.stream().map(this::covertToDto).toList();
     }
 
     @Override
-    public Optional<Car> findById(int id) {
-        return carRepository.findById(id);
+    public Optional<CarDto> findById(int id) {
+        return carRepository.findById(id).map(this::covertToDto);
     }
 
     @Override
@@ -36,5 +38,9 @@ public class SimpleCarService implements CarService {
     @Override
     public boolean deleteById(int id) {
         return carRepository.deleteById(id);
+    }
+
+    public CarDto covertToDto(Car car) {
+        return new CarDto(car.getId(), car.getName(), car.getColor(), car.getEngine(), car.getBrand());
     }
 }

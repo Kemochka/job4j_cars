@@ -1,5 +1,6 @@
 package cars.service.car;
 
+import cars.dto.CarDto;
 import cars.model.Car;
 
 import java.util.Collection;
@@ -8,9 +9,9 @@ import java.util.Optional;
 public interface CarService {
     Car save(Car car);
 
-    Collection<Car> findAll();
+    Collection<CarDto> findAll();
 
-    Optional<Car> findById(int id);
+    Optional<CarDto> findById(int id);
 
     boolean update(Car car);
 
