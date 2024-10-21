@@ -23,10 +23,10 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th class="col-3 text-center">Автомобиль</th>
-                        <th class="col-3 text-center">Описание</th>
-                        <th class="col-3 text-center">Дата создания</th>
-                        <th class="col-3 text-center">Статус объявления</th>
+                        <th class="col-3 text-center">Car</th>
+                        <th class="col-3 text-center">Description</th>
+                        <th class="col-3 text-center">Date</th>
+                        <th class="col-3 text-center">Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,8 +36,8 @@
                                                    th:href="@{/posts/{id}(id=${post.id})}"></a></td>
                         <td class="text-center"><span th:text="${post.description}"></span></td>
                         <td class="text-center"><span th:text="${#temporals.format(post.created, 'dd.MM.yyyy HH:mm')}"></span></td>
-                        <td class="text-center"><span th:if="${!post.sold}">Снято с продажи</span>
-                            <span th:if="${post.sold}">Активно</span>
+                        <td class="text-center"><span th:if="${!post.sold}">Sold</span>
+                            <span th:if="${post.sold}">Active</span>
                     </tr>
                     </tbody>
                 </table>

@@ -29,6 +29,7 @@
                 <p><strong>Post created:</strong> <span
                         th:text="${#temporals.format(post.created, 'dd.MM.yyyy HH:mm')}"></span></p>
                 <p><strong>Post actual:</strong> <span th:text="${post.sold}"></span></p>
+                <p><strong>Price:</strong> <span th:text="${post.price}" style="font-size: 24px; color: green;"></span></p>
             </div>
             <div class="row">
                 <div class="col-12">
@@ -40,6 +41,23 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row col-5 mt-3">
+                <h4>Price History</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="col-2" scope="col">Price, $</th>
+                        <th class="col-5" scope="col">Date of Change</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="priceHistory: ${priceHistories}">
+                        <td th:text="${priceHistory.after}"></td>
+                        <td th:text="${#temporals.format(priceHistory.created, 'dd.MM.yyyy HH:mm')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="row">

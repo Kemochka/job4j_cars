@@ -23,25 +23,25 @@
                   enctype="multipart/form-data">
                 <input type="hidden" name="id" th:field="*{id}">
                 <div class="mb-3">
-                    <label class="form-label" for="name"><b>Название</b></label>
-                    <input class="form-control" id="name" name="name" placeholder="Название" required
+                    <label class="form-label" for="name"><b>Name of car</b></label>
+                    <input class="form-control" id="name" name="name" placeholder="Enter name" required
                            th:value="${car.name}" type="text">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="brand.id"><b>Модель</b></label>
+                    <label class="form-label" for="brand.id"><b>Model</b></label>
                     <select class="form-control" id="brand.id" name="brand.id" required th:field="*{brand.id}">
                         <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}"></option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="color.id"><b>Цвет</b></label>
+                    <label class="form-label" for="color.id"><b>Color</b></label>
                     <select class="form-control" id="color.id" name="color.id" required th:field="*{color.id}">
                         <option th:each="color : ${colors}" th:value="${color.id}" th:text="${color.name}"></option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="engine.id"><b>Двигатель</b></label>
-                    <input class="form-control" id="engine.id" name="engine.name" placeholder="Название" required
+                    <label class="form-label" for="engine.id"><b>Engine</b></label>
+                    <input class="form-control" id="engine.id" name="engine.name" placeholder="Enter name" required
                            th:value="${car.engine.name}" type="text">
                 </div>
                 <div class="mb-3">
