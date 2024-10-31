@@ -5,13 +5,13 @@ import cars.model.Car;
 
 public class CarConverter {
     public static CarDto convertToDto(Car car) {
-        return new CarDto(
-                car.getId(),
-                car.getName(),
-                car.getColor(),
-                car.getEngine(),
-                car.getBrand()
-        );
+        return CarDto.builder()
+                .id(car.getId())
+                .name(car.getName())
+                .color(car.getColor())
+                .engine(car.getEngine())
+                .brand(car.getBrand())
+                .build();
     }
 
     public static Car convertToCar(CarDto carDto) {
