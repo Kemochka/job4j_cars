@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    User create(User user);
+    Optional<User> create(User user);
 
     void update(User user);
 

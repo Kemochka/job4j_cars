@@ -26,9 +26,9 @@ class SimpleUserServiceTest {
     public void whenCreateUserThenReturnSavedUser() {
         User user = new User();
         user.setLogin("testLogin");
-        when(userRepository.create(user)).thenReturn(user);
-        User actual = userService.create(user);
-        assertThat(actual).isEqualTo(user);
+        when(userRepository.create(user)).thenReturn(Optional.of(user));
+        Optional<User> actual = userService.create(user);
+        assertThat(actual).isEqualTo(Optional.of(user));
     }
 
     @Test

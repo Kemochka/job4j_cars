@@ -30,7 +30,7 @@ class UserControllerTest {
     public void whenUserRegistrationAndRedirectIndex() {
         var user = new User(1, "ex@1.ya", "Ivan", "password", "timeZone");
         var userArgCaptor = ArgumentCaptor.forClass(User.class);
-        when(userService.create(userArgCaptor.capture())).thenReturn(user);
+        when(userService.create(userArgCaptor.capture())).thenReturn(Optional.of(user));
 
         var model = new ConcurrentModel();
         var view = userController.register(user, model);

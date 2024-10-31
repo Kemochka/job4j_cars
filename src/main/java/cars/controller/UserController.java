@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.TimeZone;
 
 @Controller
@@ -25,10 +24,6 @@ public class UserController {
     @GetMapping("/register")
     public String getRegistrationPage(Model model, HttpSession session) {
         var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Guest");
-        }
         var zones = new ArrayList<TimeZone>();
         for (String timeId : TimeZone.getAvailableIDs()) {
             zones.add(TimeZone.getTimeZone(timeId));
@@ -51,9 +46,8 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute User user, Model model) {
-        Optional<User> savedUser = Optional.ofNullable(userService.create(user));
+        var savedUser = userService.create(user);
         if (savedUser.isEmpty()) {
-            user.setName("Guest");
             model.addAttribute("error", "Пользователь с такой почтой уже существует");
             return "users/register";
         }

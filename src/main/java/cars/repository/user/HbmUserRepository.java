@@ -3,6 +3,7 @@ package cars.repository.user;
 import cars.model.User;
 import cars.repository.CrudRepository;
 import lombok.AllArgsConstructor;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class HbmUserRepository implements UserRepository {
     private final CrudRepository crudRepository;
+    private static final Logger LOGGER = Logger.getLogger(HbmUserRepository.class);
 
     /**
      * Сохранить в базе.
@@ -20,9 +22,14 @@ public class HbmUserRepository implements UserRepository {
      * @param user пользователь.
      * @return пользователь с id.
      */
-    public User create(User user) {
-        crudRepository.run(session -> session.persist(user));
-        return user;
+    public Optional<User> create(User user) {
+        try {
+            crudRepository.run(session -> session.persist(user));
+            return Optional.of(user);
+        } catch (Exception e) {
+            LOGGER.error("Exception during save user", e);
+        }
+        return Optional.empty();
     }
 
     /**
