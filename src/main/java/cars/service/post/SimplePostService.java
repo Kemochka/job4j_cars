@@ -71,6 +71,8 @@ public class SimplePostService implements PostService {
 
     @Override
     public boolean deleteById(int id) {
+        var postOptional = findById(id);
+        postOptional.ifPresent(post -> photoService.deleteByPostId(post.getId()));
         return postRepository.deleteById(id);
     }
 

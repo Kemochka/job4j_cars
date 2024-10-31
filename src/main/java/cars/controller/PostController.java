@@ -58,8 +58,6 @@ public class PostController {
 
     @GetMapping("delete/{id}")
     public String deleteById(Model model, @PathVariable int id) {
-        var postOptional = postService.findById(id);
-        photoService.deleteByPostId(postOptional.get().getId());
         boolean isDeleted = postService.deleteById(id);
         if (!isDeleted) {
             model.addAttribute("message", "Post is not deleted");
@@ -69,17 +67,13 @@ public class PostController {
 
     @PostMapping("/create")
     public String create(@RequestParam int carId, @ModelAttribute Post post, @SessionAttribute User user, @RequestParam MultipartFile file) throws IOException {
-        try {
-            post.setUser(user);
-            CarDto carDto = carService.findById(carId)
-                    .orElseThrow(() -> new IllegalArgumentException("Car not found"));
-            Car car = CarConverter.convertToCar(carDto);
-            post.setCar(car);
-            PhotoDto photoDto = new PhotoDto(file.getOriginalFilename(), file.getBytes());
-            postService.save(post, photoDto);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        post.setUser(user);
+        CarDto carDto = carService.findById(carId)
+                .orElseThrow(() -> new IllegalArgumentException("Car not found"));
+        Car car = CarConverter.convertToCar(carDto);
+        post.setCar(car);
+        PhotoDto photoDto = new PhotoDto(file.getOriginalFilename(), file.getBytes());
+        postService.save(post, photoDto);
         return "redirect:/posts";
     }
 
@@ -96,17 +90,13 @@ public class PostController {
     }
 
     @PostMapping("/update")
-    public String update(Model model, @ModelAttribute Post post, @RequestParam MultipartFile file, @SessionAttribute User user) {
+    public String update(Model model, @ModelAttribute Post post, @RequestParam MultipartFile file, @SessionAttribute User user) throws IOException {
         post.setUser(user);
-        try {
-            post.setPriceHistory(priceHistoryService.findAllLastPriceByPostId(post.getId()));
-            var isUpdated = postService.update(post, new PhotoDto(file.getOriginalFilename(), file.getBytes()));
-            if (!isUpdated) {
-                model.addAttribute("message", "Post not update");
-                return "errors/404";
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        post.setPriceHistory(priceHistoryService.findAllLastPriceByPostId(post.getId()));
+        var isUpdated = postService.update(post, new PhotoDto(file.getOriginalFilename(), file.getBytes()));
+        if (!isUpdated) {
+            model.addAttribute("message", "Post not update");
+            return "errors/404";
         }
         return "redirect:/posts";
     }

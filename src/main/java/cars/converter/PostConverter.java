@@ -10,13 +10,13 @@ public class PostConverter {
 
     public PostDto convertToPostDto(Post post) {
         CarDto carDto = CarConverter.convertToDto(post.getCar());
-        return new PostDto(
-                post.getId(),
-                carDto,
-                post.getDescription(),
-                post.getCreated(),
-                post.isSold(),
-                post.getPrice()
-        );
+        return PostDto.builder()
+                .id(post.getId())
+                .car(carDto)
+                .description(post.getDescription())
+                .created(post.getCreated())
+                .sold(post.isSold())
+                .price(post.getPrice())
+                .build();
     }
 }
